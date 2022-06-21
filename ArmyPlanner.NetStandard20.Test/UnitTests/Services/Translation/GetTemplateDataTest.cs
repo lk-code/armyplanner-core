@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Translation
 {
     [TestClass]
-    public class GetTemplateNameTest
+    public class GetTemplateDataTest
     {
         [TestMethod]
         public void TestOnlyTemplate()
@@ -13,10 +13,10 @@ namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Translation
             string template = "{{test_template}}";
             string expection = "test_template";
             List<string> parameters = new List<string> { "test_template" };
-            ITranslationService codexTranslationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
+            ITranslationService translationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
 
             // run
-            Dictionary<string, List<string>> result = codexTranslationService.GetTemplateData(template);
+            Dictionary<string, List<string>> result = translationService.GetTemplateData(template);
 
             // test
             Assert.AreEqual(1, result.Count);
@@ -41,10 +41,10 @@ namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Translation
             string template = "{{test_template,5,3}}";
             string expection = "test_template";
             List<string> parameters = new List<string> { "test_template,5,3", "5", "3" };
-            ITranslationService codexTranslationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
+            ITranslationService translationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
 
             // run
-            Dictionary<string, List<string>> result = codexTranslationService.GetTemplateData(template);
+            Dictionary<string, List<string>> result = translationService.GetTemplateData(template);
 
             // test
             Assert.AreEqual(1, result.Count);

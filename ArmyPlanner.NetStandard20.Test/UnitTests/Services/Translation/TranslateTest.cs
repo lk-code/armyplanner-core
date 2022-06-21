@@ -19,10 +19,10 @@ namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Translation
                 { "name", "Ein Name für den Test" }
             };
             string expection = "Dies ist ein Test mit 5 Einträgen und 3 Feldern.";
-            ITranslationService codexTranslationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
+            ITranslationService translationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
 
             // run
-            string result = codexTranslationService.Translate(template, translations);
+            string result = translationService.Translate(template, translations);
 
             // test
             Assert.AreEqual(expection, result);
@@ -39,10 +39,10 @@ namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Translation
                 { "testnew_template", "Gelaber" }
             };
             string expection = "Ein Test mit Text mit 5 Zeichen und 3 bis 9 Feldern. und Gelaber.";
-            ITranslationService codexTranslationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
+            ITranslationService translationService = Startup.ServiceProvider.GetService<ITranslationService>()!;
 
             // run
-            string result = codexTranslationService.Translate(template, translations);
+            string result = translationService.Translate(template, translations);
 
             // test
             Assert.AreEqual(expection, result);
