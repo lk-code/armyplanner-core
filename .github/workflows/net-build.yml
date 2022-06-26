@@ -21,5 +21,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore -p:PackageVersion=1.0.${{ github.run_number }}
+    - name: Prep packages
+      run: dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
     - name: Publish
-      run: dotnet nuget push armyplanner-core/armyplanner-core/ArmyPlanner/bin/Release/*.nupkg --no-symbols true --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push armyplanner-core/armyplanner-core/ArmyPlanner/bin/Release/*.nupkg --no-symbols true --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} --source "nuget.org"
