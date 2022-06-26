@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore -p:PackageVersion=1.0.${{ github.run_number }}
     - name: Publish
-      run: dotnet nuget push '**/*.nupkg' -n true --skip-duplicate -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push '**/*.nupkg' -n true --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
