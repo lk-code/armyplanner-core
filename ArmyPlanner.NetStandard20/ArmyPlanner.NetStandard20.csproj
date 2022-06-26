@@ -3,7 +3,31 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>ArmyPlanner</RootNamespace>
+    <PackageId>ArmyPlanner</PackageId>
+    <Authors>lk-code</Authors>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Product>ArmyPlanner</Product>
+    <Description>The library for the ArmyPlanner platform</Description>
+    <Copyright>MIT</Copyright>
+    <PackageProjectUrl>https://lk-code.github.io/armyplanner</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/lk-code/armyplanner</RepositoryUrl>
+    <PackageIcon>icon_128.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\icon_128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />

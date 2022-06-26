@@ -5,9 +5,9 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyPlanner.NetStandard20", "ArmyPlanner.NetStandard20\ArmyPlanner.NetStandard20.csproj", "{C878A5E5-34F9-4B39-B72E-0F65A0907EB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyPlanner.NetStandard20.Test", "ArmyPlanner.NetStandard20.Test\ArmyPlanner.NetStandard20.Test.csproj", "{74000F01-B549-4714-A235-20AC31ADDB97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArmyPlanner.NetStandard20.Test", "ArmyPlanner.NetStandard20.Test\ArmyPlanner.NetStandard20.Test.csproj", "{74000F01-B549-4714-A235-20AC31ADDB97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyPlanner.Test.Base", "ArmyPlanner.Test.Base\ArmyPlanner.Test.Base.csproj", "{1E5D456B-47D9-434D-8F4D-B4D14ABC0DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArmyPlanner.Test.Base", "ArmyPlanner.Test.Base\ArmyPlanner.Test.Base.csproj", "{1E5D456B-47D9-434D-8F4D-B4D14ABC0DC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
