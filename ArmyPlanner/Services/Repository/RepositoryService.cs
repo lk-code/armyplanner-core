@@ -63,7 +63,7 @@ namespace ArmyPlanner.Services.Repository
         public async Task<List<GameEntry>> GetSubscribedGamesAsync()
         {
             string indexJsonData = await this._storageService.GetDataAsync(INDEX_FILE_NAME,
-            $"{this._basePathForData}/{REPOSITORY_LOCALSTORAGE_FOLDER}");
+            $"{this._basePathForData}\\{REPOSITORY_LOCALSTORAGE_FOLDER}");
 
             if (string.IsNullOrEmpty(indexJsonData))
             {
