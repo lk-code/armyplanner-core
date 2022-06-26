@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore -p:PackageVersion=1.0.${{ github.run_number }}
     - name: Publish
-      run: dotnet nuget push --source **/*.nupkg --no-symbols true --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push --source armyplanner-core/armyplanner-core/ArmyPlanner/bin/Release/*.nupkg --no-symbols true --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
