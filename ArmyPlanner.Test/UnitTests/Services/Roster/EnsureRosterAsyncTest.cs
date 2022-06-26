@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
-namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Roster
+namespace ArmyPlanner.Test.UnitTests.Services.Roster
 {
     [TestClass]
     public class EnsureRosterAsyncTest

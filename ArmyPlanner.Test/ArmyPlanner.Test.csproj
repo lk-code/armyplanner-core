@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ArmyPlanner.NetStandard20\ArmyPlanner.NetStandard20.csproj" />
+    <ProjectReference Include="..\ArmyPlanner\ArmyPlanner.csproj" />
     <ProjectReference Include="..\ArmyPlanner.Test.Base\ArmyPlanner.Test.Base.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 
-namespace ArmyPlanner.NetStandard20.Test
+namespace ArmyPlanner.Test
 {
     [TestClass]
     public class Initialize

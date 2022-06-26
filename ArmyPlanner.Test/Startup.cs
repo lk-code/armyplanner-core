@@ -2,7 +2,7 @@
 using ArmyPlanner.Test.Base.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ArmyPlanner.NetStandard20.Test
+namespace ArmyPlanner.Test
 {
     internal static class Startup
     {

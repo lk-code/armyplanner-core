@@ -1,7 +1,7 @@
 ﻿using ArmyPlanner.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ArmyPlanner.NetStandard20.Test.UnitTests.Services.Translation
+namespace ArmyPlanner.Test.UnitTests.Services.Translation
 {
     [TestClass]
     public class TranslateTest
