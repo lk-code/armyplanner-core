@@ -23,15 +23,6 @@ jobs:
       run: dotnet build --configuration Release --no-restore -p:PackageVersion=1.0.${{ github.run_number }}
     - name: Publish Nuget package
       # You may pin to the exact commit or the version.
-      # uses: myci-actions/publish-nuget@fe315834b49173c9502c4787904cd9093aa29131
-      uses: myci-actions/publish-nuget@5
-      with:
-        # nuget package filename, wildcards allowed
-        filename: "*.nupkg"
-        # API key to access the repository
-        api-key: ${{secrets.NUGET_API_KEY}}
-    - name: PowerShell script
-      # You may pin to the exact commit or the version.
       # uses: Amadevus/pwsh-script@1f1751bbf3d1a92127bfc6c32403283625880cbf
       uses: Amadevus/pwsh-script@v2.0.1
       with:
