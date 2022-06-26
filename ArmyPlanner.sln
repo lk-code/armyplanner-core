@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyPlanner", "ArmyPlanner\ArmyPlanner.csproj", "{C878A5E5-34F9-4B39-B72E-0F65A0907EB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArmyPlanner", "ArmyPlanner\ArmyPlanner.csproj", "{C878A5E5-34F9-4B39-B72E-0F65A0907EB0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArmyPlanner.Test", "ArmyPlanner.Test\ArmyPlanner.Test.csproj", "{74000F01-B549-4714-A235-20AC31ADDB97}"
 EndProject
