@@ -16,6 +16,7 @@ namespace ArmyPlanner.Services.Repository
         #region properties
 
         private readonly IStorageService _storageService;
+        private readonly IHttpService _httpService;
 
         // => Load from Azure Storage Source
         //// the repository host url
@@ -40,9 +41,11 @@ namespace ArmyPlanner.Services.Repository
 
         #region constructors
 
-        public RepositoryService(IStorageService storageService)
+        public RepositoryService(IStorageService storageService,
+            IHttpService httpService)
         {
             this._storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
+            this._httpService = httpService ?? throw new ArgumentNullException(nameof(httpService));
 
             this._gamesInRepository = new List<GameEntry>();
             this._gamesInLocalStorage = new List<GameEntry>();
@@ -173,26 +176,10 @@ namespace ArmyPlanner.Services.Repository
         /// <returns>the JSON-Response as string.</returns>
         private async Task<string> GetJsonFromUrlInRepositoryAsync(string requestUrl)
         {
-            HttpClient httpClient = await this.CreateHttpClientAsync();
-
-            // add the t-variable to remove github cache
-            string responseJson = await httpClient.GetStringAsync($"{REPOSITORY_CONTAINER}{requestUrl}?t={DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")}");
+            string requestUri = $"{REPOSITORY_HOST}{REPOSITORY_CONTAINER}{requestUrl}";
+            string responseJson = await this._httpService.GetStringAsync(requestUri);
 
             return responseJson;
-        }
-
-        /// <summary>
-        /// creates the HTTP-Client to load json-data.
-        /// </summary>
-        /// <returns>the created and configured HttpClient-Object.</returns>
-        private async Task<HttpClient> CreateHttpClientAsync()
-        {
-            await Task.CompletedTask;
-
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(REPOSITORY_HOST);
-
-            return httpClient;
         }
 
         /// <summary>
@@ -219,7 +206,7 @@ namespace ArmyPlanner.Services.Repository
                 string codexJson = await this.GetJsonFromUrlInRepositoryAsync(codexPath);
                 await this._storageService.WriteDataAsync(codexEntry.Path,
                     codexJson,
-                    $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path}");
+                    $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path.Remove(0, 1)}");
                 parsedCodex = JsonConvert.DeserializeObject<Models.Codices.Codex>(codexJson);
 
                 if (parsedCodex == null)
@@ -235,7 +222,7 @@ namespace ArmyPlanner.Services.Repository
                     string codexLanguageJson = await this.GetJsonFromUrlInRepositoryAsync(codexLanguagePath);
                     await this._storageService.WriteDataAsync(codexLanguage.Path,
                         codexLanguageJson,
-                        $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path}");
+                        $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path.Remove(0, 1)}");
                 }
 
                 currentCodexIndex++;

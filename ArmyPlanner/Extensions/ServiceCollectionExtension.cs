@@ -1,5 +1,6 @@
 ﻿using ArmyPlanner.Interfaces;
 using ArmyPlanner.Services.Codex;
+using ArmyPlanner.Services.Http;
 using ArmyPlanner.Services.Repository;
 using ArmyPlanner.Services.Roster;
 using ArmyPlanner.Services.Translation;
@@ -11,6 +12,7 @@ namespace ArmyPlanner.Extensions
     {
         public static IServiceCollection AddArmyPlanner(this IServiceCollection services)
         {
+            services.AddSingleton<IHttpService, HttpService>();
             services.AddSingleton<IRepositoryService, RepositoryService>();
             services.AddSingleton<ITranslationService, TranslationService>();
             services.AddSingleton<ICodexService, CodexService>();
