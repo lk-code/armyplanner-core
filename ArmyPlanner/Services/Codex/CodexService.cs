@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ArmyPlanner.Services.Codex
@@ -55,7 +56,7 @@ namespace ArmyPlanner.Services.Codex
         {
             string storageDirectory = this._repositoryService.GetGameStorageFilePath(gamePath);
             string codexJsonContent = await this._storageService.GetDataAsync(codexPath,
-                $"{this._basePathForCodexData}/{storageDirectory}");
+                $"{this._basePathForCodexData}{Path.DirectorySeparatorChar}{storageDirectory}");
 
             if (string.IsNullOrEmpty(codexJsonContent))
             {
@@ -89,7 +90,7 @@ namespace ArmyPlanner.Services.Codex
                 codexLanguage.LanguageCode);
 
             string codexTranslationJsonData = await this._storageService.GetDataAsync(codexTranslationFileName,
-            $"{this._basePathForCodexData}/{storageDirectory}");
+            $"{this._basePathForCodexData}{Path.DirectorySeparatorChar}{storageDirectory}");
             Dictionary<string, string> translations = JsonConvert.DeserializeObject<Dictionary<string, string>>(codexTranslationJsonData);
 
             return translations;

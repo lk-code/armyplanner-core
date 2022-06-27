@@ -76,7 +76,7 @@ namespace ArmyPlanner.Test.UnitTests.Services.Roster
             string indexJsonData = JsonConvert.SerializeObject(games);
             await storageService.WriteDataAsync("armyplanner-index.json",
                 indexJsonData,
-                "app_data/data");
+                $"app_data{Path.DirectorySeparatorChar}data");
 
             var roster = new Models.Rosters.Roster
             {

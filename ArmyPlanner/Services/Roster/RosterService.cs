@@ -5,6 +5,7 @@ using ArmyPlanner.Services.Roster.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -69,7 +70,7 @@ namespace ArmyPlanner.Services.Roster
                 string rosterFileName = $"{indexEntry.FileId}.{ROSTER_FILE_EXTENSION}";
                 string rosterData = await this._storageService.GetDataAsync(
                     rosterFileName,
-                    $"{this._basePathForRosterData}/{ROSTER_LOCALSTORAGE_FOLDER}");
+                    $"{this._basePathForRosterData}{Path.DirectorySeparatorChar}{ROSTER_LOCALSTORAGE_FOLDER}");
                 ArmyPlanner.Models.Rosters.Roster roster = JsonConvert.DeserializeObject<ArmyPlanner.Models.Rosters.Roster>(rosterData);
                 this._storedRosters.Add(roster);
             }
@@ -83,7 +84,7 @@ namespace ArmyPlanner.Services.Roster
         {
             string indexJsonData = await this._storageService.GetDataAsync(
                 INDEX_FILE_NAME,
-                $"{this._basePathForRosterData}/{ROSTER_LOCALSTORAGE_FOLDER}");
+                $"{this._basePathForRosterData}{Path.DirectorySeparatorChar}{ROSTER_LOCALSTORAGE_FOLDER}");
             List<RosterIndexEntry> rosterIndex = new List<RosterIndexEntry>();
             if (!string.IsNullOrEmpty(indexJsonData.Trim()))
             {
@@ -104,7 +105,7 @@ namespace ArmyPlanner.Services.Roster
             await this._storageService.WriteDataAsync(
                 INDEX_FILE_NAME,
                 indexJsonData,
-            $"{this._basePathForRosterData}/{ROSTER_LOCALSTORAGE_FOLDER}");
+            $"{this._basePathForRosterData}{Path.DirectorySeparatorChar}{ROSTER_LOCALSTORAGE_FOLDER}");
         }
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace ArmyPlanner.Services.Roster
             await this._storageService.WriteDataAsync(
                 rosterFileName,
                 rosterJsonData,
-            $"{this._basePathForRosterData}/{ROSTER_LOCALSTORAGE_FOLDER}");
+            $"{this._basePathForRosterData}{Path.DirectorySeparatorChar}{ROSTER_LOCALSTORAGE_FOLDER}");
 
             // reload roster index
             await this.LoadRosterIndexAsync();

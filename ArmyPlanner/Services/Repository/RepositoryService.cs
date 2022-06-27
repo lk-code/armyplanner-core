@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace ArmyPlanner.Services.Repository
         public async Task<List<GameEntry>> GetSubscribedGamesAsync()
         {
             string indexJsonData = await this._storageService.GetDataAsync(INDEX_FILE_NAME,
-            $"{this._basePathForData}\\{REPOSITORY_LOCALSTORAGE_FOLDER}");
+            $"{this._basePathForData}{Path.DirectorySeparatorChar}{REPOSITORY_LOCALSTORAGE_FOLDER}");
 
             if (string.IsNullOrEmpty(indexJsonData))
             {
@@ -218,7 +219,7 @@ namespace ArmyPlanner.Services.Repository
                 string codexJson = await this.GetJsonFromUrlInRepositoryAsync(codexPath);
                 await this._storageService.WriteDataAsync(codexEntry.Path,
                     codexJson,
-                    $"{REPOSITORY_LOCALSTORAGE_FOLDER}/{gameEntry.Path}");
+                    $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path}");
                 parsedCodex = JsonConvert.DeserializeObject<Models.Codices.Codex>(codexJson);
 
                 if (parsedCodex == null)
@@ -234,7 +235,7 @@ namespace ArmyPlanner.Services.Repository
                     string codexLanguageJson = await this.GetJsonFromUrlInRepositoryAsync(codexLanguagePath);
                     await this._storageService.WriteDataAsync(codexLanguage.Path,
                         codexLanguageJson,
-                        $"{REPOSITORY_LOCALSTORAGE_FOLDER}/{gameEntry.Path}");
+                        $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path}");
                 }
 
                 currentCodexIndex++;
@@ -256,7 +257,7 @@ namespace ArmyPlanner.Services.Repository
             string indexJsonData = JsonConvert.SerializeObject(this._gamesInLocalStorage);
             await this._storageService.WriteDataAsync(INDEX_FILE_NAME,
                 indexJsonData,
-            $"{this._basePathForData}/{REPOSITORY_LOCALSTORAGE_FOLDER}");
+            $"{this._basePathForData}{Path.DirectorySeparatorChar}{REPOSITORY_LOCALSTORAGE_FOLDER}");
         }
 
         /// <summary>
