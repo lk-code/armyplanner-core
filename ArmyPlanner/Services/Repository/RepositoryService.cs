@@ -28,8 +28,8 @@ namespace ArmyPlanner.Services.Repository
         private const string REPOSITORY_HOST = "https://raw.githubusercontent.com";
         // the repository container path
         private const string REPOSITORY_CONTAINER = "/lk-code/armyplanner/main";
-        // the local storage folder
-        private const string REPOSITORY_LOCALSTORAGE_FOLDER = "data";
+        // the local storage folder (public for testing methods)
+        public const string REPOSITORY_LOCALSTORAGE_FOLDER = "data";
         // the local storage index file
         private const string INDEX_FILE_NAME = "armyplanner-index.json";
 
@@ -280,7 +280,14 @@ namespace ArmyPlanner.Services.Repository
         /// <returns>the complete local storage path for the game</returns>
         public string GetGameStorageFilePath(string gamePath)
         {
-            return $"{REPOSITORY_LOCALSTORAGE_FOLDER}{gamePath}";
+            string path = gamePath;
+
+            if (path.StartsWith("/")
+                || path.StartsWith("\\"))
+            {
+                path = path.Remove(0, 1);
+            }
+            return $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{path}";
         }
 
         #endregion
