@@ -188,6 +188,7 @@ namespace ArmyPlanner.Services.Repository
         /// <param name="gameToDownload">the game to be subscribed to.</param>
         public async Task SubscribeGameAsync(IDownloadableGame gameToDownload)
         {
+            string dataDirectoryPath = $"{this._basePathForData}{Path.DirectorySeparatorChar}{REPOSITORY_LOCALSTORAGE_FOLDER}";
             GameEntry gameEntry = gameToDownload.GetGameToDownload();
             List<CodexEntry> codexEntries = gameEntry.Codices
                 .Where(x => x.Enabled != false)
@@ -199,6 +200,8 @@ namespace ArmyPlanner.Services.Repository
             int currentCodexIndex = 1;
             foreach (CodexEntry codexEntry in codexEntries)
             {
+                string gameDirectoryPath = $"{dataDirectoryPath}{Path.DirectorySeparatorChar}{gameEntry.Path.Remove(0, 1)}";
+
                 // load codex
                 string codexPath = $"{gameEntry.Path}/{codexEntry.Path}";
                 Models.Codices.Codex parsedCodex = null;
@@ -206,7 +209,7 @@ namespace ArmyPlanner.Services.Repository
                 string codexJson = await this.GetJsonFromUrlInRepositoryAsync(codexPath);
                 await this._storageService.WriteDataAsync(codexEntry.Path,
                     codexJson,
-                    $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path.Remove(0, 1)}");
+                    gameDirectoryPath);
                 parsedCodex = JsonConvert.DeserializeObject<Models.Codices.Codex>(codexJson);
 
                 if (parsedCodex == null)
@@ -222,7 +225,7 @@ namespace ArmyPlanner.Services.Repository
                     string codexLanguageJson = await this.GetJsonFromUrlInRepositoryAsync(codexLanguagePath);
                     await this._storageService.WriteDataAsync(codexLanguage.Path,
                         codexLanguageJson,
-                        $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{gameEntry.Path.Remove(0, 1)}");
+                        gameDirectoryPath);
                 }
 
                 currentCodexIndex++;
@@ -244,7 +247,7 @@ namespace ArmyPlanner.Services.Repository
             string indexJsonData = JsonConvert.SerializeObject(this._gamesInLocalStorage);
             await this._storageService.WriteDataAsync(INDEX_FILE_NAME,
                 indexJsonData,
-            $"{this._basePathForData}{Path.DirectorySeparatorChar}{REPOSITORY_LOCALSTORAGE_FOLDER}");
+            dataDirectoryPath);
         }
 
         /// <summary>
