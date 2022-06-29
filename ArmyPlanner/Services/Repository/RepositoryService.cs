@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ArmyPlanner.Services.Repository
@@ -18,12 +17,6 @@ namespace ArmyPlanner.Services.Repository
         private readonly IStorageService _storageService;
         private readonly IHttpService _httpService;
 
-        // => Load from Azure Storage Source
-        //// the repository host url
-        //private const string REPOSITORY_HOST = "https://armyplaner.blob.core.windows.net";
-        //// the repository container path
-        //private const string REPOSITORY_CONTAINER = "/games";
-        // => Load from GitHub-Source
         // the repository host url
         private const string REPOSITORY_HOST = "https://raw.githubusercontent.com";
         // the repository container path
@@ -90,37 +83,28 @@ namespace ArmyPlanner.Services.Repository
             if (forceUpdate == true
                 || this._gamesInRepository.Count <= 0)
             {
-                this._gamesInRepository = await this.GetGamesFromRepositoryAsync();
+                string gamesJsonUrl = "/index.json";
+                JObject gameIndexJson = await this.GetJObjectFromUrlInRepositoryAsync(gamesJsonUrl);
+                JArray gameEntriesIndexJson = (JArray)gameIndexJson["games"];
+
+                List<GameEntry> gameEntries = new List<GameEntry>();
+                if (gameEntriesIndexJson != null)
+                {
+                    List<GameIndex> gameIndexPaths = gameEntriesIndexJson.ToObject<List<GameIndex>>();
+
+                    // load games
+                    foreach (GameIndex gameIndex in gameIndexPaths)
+                    {
+                        GameEntry loadedGameEntry = await this.GetGameEntryByPath(gameIndex.Path);
+
+                        gameEntries.Add(loadedGameEntry);
+                    }
+                }
+
+                this._gamesInRepository = gameEntries;
             }
 
             return this._gamesInRepository;
-        }
-
-        /// <summary>
-        /// loads all available games from the repository and returns all as a list.
-        /// </summary>
-        /// <returns>all loaded games as a list.</returns>
-        private async Task<List<GameEntry>> GetGamesFromRepositoryAsync()
-        {
-            string gamesJsonUrl = "/index.json";
-            JObject gameIndexJson = await this.GetJObjectFromUrlInRepositoryAsync(gamesJsonUrl);
-            JArray gameEntriesIndexJson = (JArray)gameIndexJson["games"];
-
-            List<GameEntry> gameEntries = new List<GameEntry>();
-            if (gameEntriesIndexJson != null)
-            {
-                List<GameIndex> gameIndexPaths = gameEntriesIndexJson.ToObject<List<GameIndex>>();
-
-                // load games
-                foreach (GameIndex gameIndex in gameIndexPaths)
-                {
-                    GameEntry loadedGameEntry = await this.GetGameEntryByPath(gameIndex.Path);
-
-                    gameEntries.Add(loadedGameEntry);
-                }
-            }
-
-            return gameEntries;
         }
 
         /// <summary>
@@ -287,7 +271,10 @@ namespace ArmyPlanner.Services.Repository
             {
                 path = path.Remove(0, 1);
             }
-            return $"{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{path}";
+
+            string storagePath = $"{this._basePathForData}{Path.DirectorySeparatorChar}{REPOSITORY_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{path}";
+
+            return storagePath;
         }
 
         #endregion

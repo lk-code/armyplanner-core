@@ -27,5 +27,11 @@ namespace ArmyPlanner.Interfaces
         /// </summary>
         /// <param name="path">the basic path for the app. app data is stored in this folder (The folder should not be public)</param>
         void SetBasePathForCodexData(string path);
+        /// <summary>
+        /// returns the local storage file path for the given game path
+        /// </summary>
+        /// <param name="gamePath">the game-path</param>
+        /// <returns>the complete local storage path for the codicies</returns>
+        string GetCodiciesStorageFilePath(string gamePath);
     }
 }

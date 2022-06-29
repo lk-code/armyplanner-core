@@ -23,11 +23,6 @@ namespace ArmyPlanner.Test.Base.Models
             this.GameEntry = gameEntry;
         }
 
-        ~DownloadableGame()
-        {
-
-        }
-
         #endregion
 
         #region logic

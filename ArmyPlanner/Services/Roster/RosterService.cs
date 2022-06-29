@@ -131,7 +131,6 @@ namespace ArmyPlanner.Services.Roster
         /// <returns></returns>
         public async Task<ArmyPlanner.Models.Rosters.Roster> SaveAsync(ArmyPlanner.Models.Rosters.Roster roster)
         {
-            string rosterFileName = string.Empty;
             if (roster.Id.Equals(Guid.Empty))
             {
                 // new roster
@@ -140,16 +139,15 @@ namespace ArmyPlanner.Services.Roster
 
                 // update roster index
                 List<RosterIndexEntry> rosterIndex = await this.GetRosterIndexAsync();
-                rosterFileName = $"{roster.Id}.{ROSTER_FILE_EXTENSION}";
                 rosterIndex.Add(new RosterIndexEntry
                 {
                     FileId = roster.Id.ToString()
                 });
                 await this.SaveRosterIndexAsync(rosterIndex);
             }
-            rosterFileName = $"{roster.Id}.{ROSTER_FILE_EXTENSION}";
 
             // save file
+            string rosterFileName = $"{roster.Id}.{ROSTER_FILE_EXTENSION}";
             string rosterJsonData = JsonConvert.SerializeObject(roster);
             await this._storageService.WriteDataAsync(
                 rosterFileName,

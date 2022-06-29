@@ -13,7 +13,6 @@ namespace ArmyPlanner.Test.UnitTests.Services.Repository
         public async Task TestWithCorrectGameFolderName()
         {
             // prepare
-            string gamePath = "/w40k";
             IRepositoryService repositoryService = Startup.ServiceProvider.GetService<IRepositoryService>()!;
             TestHttpService httpService = (TestHttpService)Startup.ServiceProvider.GetService<IHttpService>()!;
 
@@ -38,8 +37,6 @@ namespace ArmyPlanner.Test.UnitTests.Services.Repository
                     },
                 }
             }));
-
-            int i = 0;
         }
     }
 }

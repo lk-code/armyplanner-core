@@ -11,8 +11,6 @@ namespace ArmyPlanner.Services.Codex
     {
         #region events
 
-        //public event EventHandler<CodexUpdatedEventArgs> CodexUpdated;
-
         #endregion
 
         #region properties
@@ -20,6 +18,9 @@ namespace ArmyPlanner.Services.Codex
         private readonly IStorageService _storageService;
         private readonly ITranslationService _translationService;
         private readonly IRepositoryService _repositoryService;
+
+        // the local storage folder (public for testing methods)
+        public const string CODICIES_LOCALSTORAGE_FOLDER = "data";
 
         private string _basePathForCodexData = null;
 
@@ -54,9 +55,9 @@ namespace ArmyPlanner.Services.Codex
         /// <exception cref="InvalidOperationException"></exception>
         public async Task<Models.Codices.Codex> GetCodexAsync(string gamePath, string codexPath)
         {
-            string storageDirectory = this._repositoryService.GetGameStorageFilePath(gamePath);
+            string storageDirectory = this.GetCodiciesStorageFilePath(gamePath);
             string codexJsonContent = await this._storageService.GetDataAsync(codexPath,
-                $"{this._basePathForCodexData}{Path.DirectorySeparatorChar}{storageDirectory}");
+                storageDirectory);
 
             if (string.IsNullOrEmpty(codexJsonContent))
             {
@@ -107,6 +108,26 @@ namespace ArmyPlanner.Services.Codex
             string storageFileName = $"{codexKey}.{languageCode}.json".ToLowerInvariant();
 
             return storageFileName;
+        }
+
+        /// <summary>
+        /// returns the local storage file path for the given game path
+        /// </summary>
+        /// <param name="gamePath">the game-path</param>
+        /// <returns>the complete local storage path for the codicies</returns>
+        public string GetCodiciesStorageFilePath(string gamePath)
+        {
+            string path = gamePath;
+
+            if (path.StartsWith("/")
+                || path.StartsWith("\\"))
+            {
+                path = path.Remove(0, 1);
+            }
+
+            string storagePath = $"{this._basePathForCodexData}{Path.DirectorySeparatorChar}{CODICIES_LOCALSTORAGE_FOLDER}{Path.DirectorySeparatorChar}{path}";
+
+            return storagePath;
         }
 
         #endregion

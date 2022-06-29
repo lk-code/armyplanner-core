@@ -2,7 +2,7 @@
 
 namespace ArmyPlanner.Test.Base.Services.Storage
 {
-    internal class TestStorageService : IStorageService
+    public class TestStorageService : IStorageService
     {
         #region properties
 
@@ -49,7 +49,7 @@ namespace ArmyPlanner.Test.Base.Services.Storage
 
         private string GetId(string filename, string folderPath)
         {
-            return $"{folderPath}_{filename}";
+            return $"{folderPath}{Path.DirectorySeparatorChar}{filename}";
         }
 
         #endregion

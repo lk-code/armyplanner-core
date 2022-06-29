@@ -38,7 +38,7 @@ namespace ArmyPlanner.Services.Translation
                 string translatedText = template;
                 foreach (KeyValuePair<string, List<string>> data in templateData)
                 {
-                    translatedText = this.Translate(translatedText, data.Key, translations[data.Key], data.Value);
+                    translatedText = this.Translate(translatedText, translations[data.Key], data.Value);
                 }
 
                 return translatedText;
@@ -49,21 +49,13 @@ namespace ArmyPlanner.Services.Translation
             }
         }
 
-        private string Translate(string template, string templateKey, string translation, List<string> templateParameter)
+        private string Translate(string template, string translation, List<string> templateParameter)
         {
-            List<string> templateValues = this.GetTemplateValues(template);
+            string translated = translation;
+            translated = this.RenderTranslation(translated, templateParameter.ToArray());
+            string templatePlaceholder = TEMPLATE_START + templateParameter[0] + TEMPLATE_END;
 
-            translation = this.RenderTranslation(translation, templateParameter.ToArray());
-            string templatePlaceholder = "{{" + templateParameter[0] + "}}";
-
-            string result = template.Replace(templatePlaceholder, translation);
-
-            return result;
-        }
-
-        private string Translate(string template, string translation, params string[] parameter)
-        {
-            string result = this.RenderTranslation(translation, parameter);
+            string result = template.Replace(templatePlaceholder, translated);
 
             return result;
         }
@@ -83,18 +75,6 @@ namespace ArmyPlanner.Services.Translation
             }
 
             return translation;
-        }
-
-        private string[] SplitTemplateToParameter(string templateValue)
-        {
-            if (!templateValue.Contains(","))
-            {
-                return new string[] { };
-            }
-
-            string[] parameters = this.SplitTemplate(templateValue).Skip(1).ToArray();
-
-            return parameters;
         }
 
         private List<string> SplitTemplate(string templateValue)
