@@ -48,10 +48,8 @@ namespace ArmyPlanner.Models.Repositories
         #endregion
 
         #region constructors
-
-        public CodexEntry()
-        {
-        }
+        
+        
 
         #endregion
 

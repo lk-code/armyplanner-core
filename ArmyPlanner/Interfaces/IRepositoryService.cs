@@ -9,9 +9,14 @@ namespace ArmyPlanner.Interfaces
         /// <summary>
         /// returns a list of all games from the repository.
         /// </summary>
+        /// <returns>the list of all loaded games</returns>
+        Task<List<GameEntry>> GetGamesFromRepositoryAsync();
+        /// <summary>
+        /// returns a list of all games from the repository.
+        /// </summary>
         /// <param name="forceUpdate">if TRUE updates first the list of all games. if FALSE, returns only the local list.</param>
         /// <returns>the list of all loaded games</returns>
-        Task<List<GameEntry>> GetGamesFromRepositoryAsync(bool forceUpdate = false);
+        Task<List<GameEntry>> GetGamesFromRepositoryAsync(bool forceUpdate);
         /// <summary>
         /// loads the index for with all subscribed games from the local storage
         /// </summary>

@@ -69,7 +69,7 @@ namespace ArmyPlanner.Services.Translation
 
             if (translation.Contains("{"))
             {
-                args = new string[] { "", "", "", "", "", "", "", "", "", "" };
+                args = new [] { "", "", "", "", "", "", "", "", "", "" };
 
                 translation = this.RenderTranslation(translation, args);
             }

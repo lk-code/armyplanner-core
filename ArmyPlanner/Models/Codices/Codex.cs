@@ -11,7 +11,7 @@ namespace ArmyPlanner.Models.Codices
         public string Schema { get; private set; } = "https://raw.githubusercontent.com/lk-code/armyplanner/main/codex-schema-v1.json";
 
         [JsonIgnore]
-        public Codex BasedOnCodex { get; set; } = null;
+        public Codex BasedOnCodex { get; set; }
 
         [JsonProperty("meta")]
         public MetaContainer Meta { get; set; }

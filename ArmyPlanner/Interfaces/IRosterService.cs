@@ -10,6 +10,11 @@ namespace ArmyPlanner.Interfaces
         /// <summary>
         /// returns a list of all locally stored rosters.
         /// </summary>
+        /// <returns>the list of Roster objects stored on the device.</returns>
+        Task<List<Roster>> GetStoredRostersAsync();
+        /// <summary>
+        /// returns a list of all locally stored rosters.
+        /// </summary>
         /// <param name="forceUpdate">if true, all rosters are read again locally, otherwise the saved list is simply returned - default is false</param>
         /// <returns>the list of Roster objects stored on the device.</returns>
         Task<List<Roster>> GetStoredRostersAsync(bool forceUpdate = false);

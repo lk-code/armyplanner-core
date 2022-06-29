@@ -21,10 +21,5 @@ namespace ArmyPlanner.Models.Codices
 
         [JsonProperty("max-count")]
         public int? MaxCount { get; set; }
-
-        public OptionAction()
-        {
-
-        }
     }
 }

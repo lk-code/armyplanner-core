@@ -46,10 +46,6 @@ namespace ArmyPlanner.Test.UnitTests.Services.Roster
 
                 exception.MissingGameKey.Should().Be(missingGameKey);
             }
-            catch (Exception)
-            {
-                throw;
-            }
 
             if (!hasRequiredException)
             {
@@ -100,12 +96,10 @@ namespace ArmyPlanner.Test.UnitTests.Services.Roster
                 await rosterService.EnsureRosterAsync(roster);
             }
             // test
-            catch (MissingGameException exception)
+            catch (MissingGameException)
             {
-                throw exception;
-            }
-            catch (Exception)
-            {
+                true.Should().Be(false);
+                
                 throw;
             }
 

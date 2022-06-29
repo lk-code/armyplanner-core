@@ -9,10 +9,5 @@ namespace ArmyPlanner.Models.Codices
 
         [JsonProperty("property")]
         public string Property { get; set; }
-
-        public UserInterfaceItem()
-        {
-
-        }
     }
 }

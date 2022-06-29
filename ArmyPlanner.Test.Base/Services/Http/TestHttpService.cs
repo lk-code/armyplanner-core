@@ -7,7 +7,7 @@ namespace ArmyPlanner.Test.Base.Services.Http
     {
         #region properties
 
-        private Dictionary<string, object> _registeredContent;
+        private readonly Dictionary<string, object> _registeredContent;
 
         #endregion
 

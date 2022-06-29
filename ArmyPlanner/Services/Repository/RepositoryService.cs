@@ -22,13 +22,13 @@ namespace ArmyPlanner.Services.Repository
         // the repository container path
         private const string REPOSITORY_CONTAINER = "/lk-code/armyplanner/main";
         // the local storage folder (public for testing methods)
-        public const string REPOSITORY_LOCALSTORAGE_FOLDER = "data";
+        public static readonly string REPOSITORY_LOCALSTORAGE_FOLDER = "data";
         // the local storage index file
         private const string INDEX_FILE_NAME = "armyplanner-index.json";
 
-        private List<GameEntry> _gamesInRepository = null;
-        private List<GameEntry> _gamesInLocalStorage = null;
-        private string _basePathForData = null;
+        private List<GameEntry> _gamesInRepository;
+        private List<GameEntry> _gamesInLocalStorage;
+        private string _basePathForData;
 
         #endregion
 
@@ -76,9 +76,18 @@ namespace ArmyPlanner.Services.Repository
         /// <summary>
         /// returns a list of all games from the repository.
         /// </summary>
+        /// <returns>the list of all loaded games</returns>
+        public async Task<List<GameEntry>> GetGamesFromRepositoryAsync()
+        {
+            return await this.GetGamesFromRepositoryAsync(false);
+        }
+
+        /// <summary>
+        /// returns a list of all games from the repository.
+        /// </summary>
         /// <param name="forceUpdate">if TRUE updates first the list of all games. if FALSE, returns only the local list.</param>
         /// <returns>the list of all loaded games</returns>
-        public async Task<List<GameEntry>> GetGamesFromRepositoryAsync(bool forceUpdate = false)
+        public async Task<List<GameEntry>> GetGamesFromRepositoryAsync(bool forceUpdate)
         {
             if (forceUpdate == true
                 || this._gamesInRepository.Count <= 0)

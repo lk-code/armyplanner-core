@@ -4,7 +4,7 @@ namespace ArmyPlanner.Exceptions
 {
     public class MissingGameException : Exception
     {
-        public string MissingGameKey { get; set; } = null;
+        public string MissingGameKey { get; set; }
 
         public MissingGameException(string missingGameKey) : this(string.Empty, missingGameKey)
         {

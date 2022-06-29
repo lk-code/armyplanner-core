@@ -10,8 +10,8 @@ namespace ArmyPlanner.Test.Base.Models
 
         public event EventHandler<DownloadProgressChangedEventArgs> DownloadProgressChanged;
 
-        public GameEntry GameEntry { get; set; } = null;
-        public double DownloadProgress { get; set; } = 0f;
+        public GameEntry GameEntry { get; set; }
+        public double DownloadProgress { get; set; }
         public bool Enabled { get; set; } = true;
 
         #endregion
@@ -21,6 +21,12 @@ namespace ArmyPlanner.Test.Base.Models
         public DownloadableGame(GameEntry gameEntry)
         {
             this.GameEntry = gameEntry;
+
+            this.DownloadProgressChanged?.Invoke(this, new DownloadProgressChangedEventArgs
+            {
+                IsDownloadActive = false,
+                DownloadProgress = 0
+            });
         }
 
         #endregion

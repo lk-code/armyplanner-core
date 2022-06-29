@@ -7,31 +7,17 @@ namespace ArmyPlanner.Test
     [TestClass]
     public class Initialize
     {
+        public Initialize()
+        {
+
+        }
+
         [AssemblyInitialize]
         public static async Task AssemblyInitializeAsync(TestContext context)
         {
             Debug.WriteLine("Assembly Initialize");
 
             await Startup.Init();
-
-            #region uncommented
-            /*
-            // DateTimeService
-            DateTimeService dateTimeService = Startup.ServiceProvider.GetService<IDateTimeService>() as DateTimeService;
-            dateTimeService.FakeDateTime = System.DateTime.Now; // set as default
-
-            // ConfigService
-            IConfigService configService = Startup.ServiceProvider.GetService<IConfigService>();
-            string json = @"{
-                             ""Config"": {
-                                       ""Server"": {
-                                                    ""Url"": ""#""
-                                       }
-                             }
-            }";
-            configService.Initialize(JObject.Parse(json));
-            /* */
-            #endregion
 
             InitializeAppDataPaths();
 

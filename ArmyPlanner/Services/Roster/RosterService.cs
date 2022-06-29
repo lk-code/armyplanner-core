@@ -26,8 +26,8 @@ namespace ArmyPlanner.Services.Roster
         // the file extension for roster files
         private const string ROSTER_FILE_EXTENSION = "apr";
 
-        private string _basePathForRosterData = null;
-        private List<ArmyPlanner.Models.Rosters.Roster> _storedRosters = null;
+        private string _basePathForRosterData;
+        private readonly List<ArmyPlanner.Models.Rosters.Roster> _storedRosters;
 
         #endregion
 
@@ -109,10 +109,19 @@ namespace ArmyPlanner.Services.Roster
         }
 
         /// <summary>
-        /// 
+        /// returns a list of all locally stored rosters.
         /// </summary>
-        /// <param name="forceUpdate"></param>
-        /// <returns></returns>
+        /// <returns>the list of Roster objects stored on the device.</returns>
+        public async Task<List<ArmyPlanner.Models.Rosters.Roster>> GetStoredRostersAsync()
+        {
+            return await this.GetStoredRostersAsync(false);
+        }
+
+        /// <summary>
+        /// returns a list of all locally stored rosters.
+        /// </summary>
+        /// <param name="forceUpdate">if true, all rosters are read again locally, otherwise the saved list is simply returned - default is false</param>
+        /// <returns>the list of Roster objects stored on the device.</returns>
         public async Task<List<ArmyPlanner.Models.Rosters.Roster>> GetStoredRostersAsync(bool forceUpdate = false)
         {
             if (forceUpdate == true

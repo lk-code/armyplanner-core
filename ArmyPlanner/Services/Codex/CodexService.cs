@@ -20,9 +20,9 @@ namespace ArmyPlanner.Services.Codex
         private readonly IRepositoryService _repositoryService;
 
         // the local storage folder (public for testing methods)
-        public const string CODICIES_LOCALSTORAGE_FOLDER = "data";
+        public static readonly string CODICIES_LOCALSTORAGE_FOLDER = "data";
 
-        private string _basePathForCodexData = null;
+        private string _basePathForCodexData;
 
         #endregion
 

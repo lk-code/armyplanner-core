@@ -6,7 +6,7 @@ namespace ArmyPlanner.Test.Base.Services.Storage
     {
         #region properties
 
-        private Dictionary<string, string> _registeredContent;
+        private readonly Dictionary<string, string> _registeredContent;
 
         #endregion
 

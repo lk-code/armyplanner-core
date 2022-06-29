@@ -12,10 +12,6 @@ namespace ArmyPlanner.Services.Http
 
         #region constructors
 
-        public HttpService()
-        {
-        }
-
         #endregion
 
         #region logic
