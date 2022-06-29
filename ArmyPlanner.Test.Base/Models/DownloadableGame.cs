@@ -21,12 +21,6 @@ namespace ArmyPlanner.Test.Base.Models
         public DownloadableGame(GameEntry gameEntry)
         {
             this.GameEntry = gameEntry;
-
-            this.DownloadProgressChanged?.Invoke(this, new DownloadProgressChangedEventArgs
-            {
-                IsDownloadActive = false,
-                DownloadProgress = 0
-            });
         }
 
         #endregion

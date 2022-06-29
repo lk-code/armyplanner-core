@@ -17,7 +17,7 @@ namespace ArmyPlanner.Interfaces
         /// </summary>
         /// <param name="forceUpdate">if true, all rosters are read again locally, otherwise the saved list is simply returned - default is false</param>
         /// <returns>the list of Roster objects stored on the device.</returns>
-        Task<List<Roster>> GetStoredRostersAsync(bool forceUpdate = false);
+        Task<List<Roster>> GetStoredRostersAsync(bool forceUpdate);
         /// <summary>
         /// saves the given Roster object.
         /// </summary>

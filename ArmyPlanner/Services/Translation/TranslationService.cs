@@ -17,10 +17,6 @@ namespace ArmyPlanner.Services.Translation
 
         #region constrcutors
 
-        public TranslationService()
-        {
-        }
-
         #endregion
 
         #region logic

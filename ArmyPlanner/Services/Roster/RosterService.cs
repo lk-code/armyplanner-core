@@ -122,7 +122,7 @@ namespace ArmyPlanner.Services.Roster
         /// </summary>
         /// <param name="forceUpdate">if true, all rosters are read again locally, otherwise the saved list is simply returned - default is false</param>
         /// <returns>the list of Roster objects stored on the device.</returns>
-        public async Task<List<ArmyPlanner.Models.Rosters.Roster>> GetStoredRostersAsync(bool forceUpdate = false)
+        public async Task<List<ArmyPlanner.Models.Rosters.Roster>> GetStoredRostersAsync(bool forceUpdate)
         {
             if (forceUpdate == true
                 || this._storedRosters.Count <= 0)

@@ -5,13 +5,8 @@ using System.Diagnostics;
 namespace ArmyPlanner.Test
 {
     [TestClass]
-    public class Initialize
+    public static class Initialize
     {
-        public Initialize()
-        {
-
-        }
-
         [AssemblyInitialize]
         public static async Task AssemblyInitializeAsync(TestContext context)
         {

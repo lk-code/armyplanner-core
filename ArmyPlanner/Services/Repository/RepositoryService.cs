@@ -27,7 +27,7 @@ namespace ArmyPlanner.Services.Repository
         private const string INDEX_FILE_NAME = "armyplanner-index.json";
 
         private List<GameEntry> _gamesInRepository;
-        private List<GameEntry> _gamesInLocalStorage;
+        private readonly List<GameEntry> _gamesInLocalStorage;
         private string _basePathForData;
 
         #endregion
