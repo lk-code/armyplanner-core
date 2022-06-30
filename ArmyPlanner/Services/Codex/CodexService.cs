@@ -86,12 +86,12 @@ namespace ArmyPlanner.Services.Codex
         /// <returns>all translations in a dictionary</returns>
         public async Task<Dictionary<string, string>> GetCodexTranslationsAsync(Models.Codices.Codex codex, Models.Codices.CodexLanguage codexLanguage)
         {
-            string storageDirectory = this._repositoryService.GetGameStorageFilePath($"/{codex.Meta.Game.Key}");
+            string storageDirectory = this.GetCodiciesStorageFilePath(codex.Meta.Game.Key);
             string codexTranslationFileName = this.GetCodexTranslationsStorageFileName(codex.Meta.Codex.Key,
                 codexLanguage.LanguageCode);
 
             string codexTranslationJsonData = await this._storageService.GetDataAsync(codexTranslationFileName,
-            $"{this._basePathForCodexData}{Path.DirectorySeparatorChar}{storageDirectory}");
+            storageDirectory);
             Dictionary<string, string> translations = JsonConvert.DeserializeObject<Dictionary<string, string>>(codexTranslationJsonData);
 
             return translations;
