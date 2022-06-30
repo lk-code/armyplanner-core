@@ -40,8 +40,6 @@ namespace ArmyPlanner.Test.UnitTests.Models.Codices.Codex
         public void TestWithNull()
         {
             // prepare
-            string codexKey = "codex-key";
-            string gameKey = "big-game.key";
             string expectedResult = string.Empty;
             ArmyPlanner.Models.Codices.Codex codex = new ArmyPlanner.Models.Codices.Codex();
 
