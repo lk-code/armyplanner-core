@@ -18,15 +18,15 @@ namespace ArmyPlanner.Test.UnitTests.Services.Roster
             IRosterService rosterService = Startup.ServiceProvider.GetService<IRosterService>()!;
             bool hasRequiredException = false;
 
-            var roster = new Models.Rosters.Roster
+            var roster = new ArmyPlanner.Models.Rosters.Roster
             {
                 Id = System.Guid.NewGuid(),
                 Name = "TEST",
                 Description = "UnitTest",
                 RequiredGame = missingGameKey,
-                RequiredCodizes = new List<Models.Rosters.RequiredCodex>
+                RequiredCodizes = new List<ArmyPlanner.Models.Rosters.RequiredCodex>
                 {
-                    new Models.Rosters.RequiredCodex
+                    new ArmyPlanner.Models.Rosters.RequiredCodex
                     {
                         Key = "test",
                         Language = "test"
@@ -74,15 +74,15 @@ namespace ArmyPlanner.Test.UnitTests.Services.Roster
                 indexJsonData,
                 $"app_data{Path.DirectorySeparatorChar}data");
 
-            var roster = new Models.Rosters.Roster
+            var roster = new ArmyPlanner.Models.Rosters.Roster
             {
                 Id = System.Guid.NewGuid(),
                 Name = "TEST",
                 Description = "UnitTest",
                 RequiredGame = missingGameKey,
-                RequiredCodizes = new List<Models.Rosters.RequiredCodex>
+                RequiredCodizes = new List<ArmyPlanner.Models.Rosters.RequiredCodex>
                 {
-                    new Models.Rosters.RequiredCodex
+                    new ArmyPlanner.Models.Rosters.RequiredCodex
                     {
                         Key = "test",
                         Language = "test"

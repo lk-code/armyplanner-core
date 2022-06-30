@@ -64,6 +64,32 @@ namespace ArmyPlanner.Models.Codices
             return false;
         }
 
+        public override string ToString()
+        {
+            if (this.Meta == null
+                || this.Meta.Game == null
+                || string.IsNullOrEmpty(this.Meta.Game.Key)
+                || this.Meta.Codex == null
+                || string.IsNullOrEmpty(this.Meta.Codex.Key))
+            {
+                return string.Empty;
+            }
+
+            string tostring = string.Empty;
+
+            if (this.Meta.Game != null)
+            {
+                tostring += $"game: {this.Meta.Game.Key};";
+            }
+
+            if (this.Meta.Codex != null)
+            {
+                tostring += $"codex: {this.Meta.Codex.Key};";
+            }
+
+            return tostring;
+        }
+
         #endregion
     }
 }
