@@ -29,6 +29,7 @@ namespace ArmyPlanner.Services.Storage
         /// <returns></returns>
         public async Task<string> GetDataAsync(string filename, string folderPath)
         {
+#if NET5_0_OR_GREATER
             string filePath = Path.Combine(folderPath, filename);
 
             if (!File.Exists(filePath))
@@ -37,6 +38,9 @@ namespace ArmyPlanner.Services.Storage
             }
 
             return await File.ReadAllTextAsync(filePath);
+#else
+            return string.Empty;
+#endif
         }
 
         /// <summary>
@@ -48,11 +52,13 @@ namespace ArmyPlanner.Services.Storage
         /// <returns></returns>
         public async Task WriteDataAsync(string filename, string content, string folderPath)
         {
+#if NET5_0_OR_GREATER
             Directory.CreateDirectory(folderPath);
 
             string filePath = Path.Combine(folderPath, filename);
 
             await File.WriteAllTextAsync(filePath, content);
+#endif
         }
 
         #endregion
